@@ -5,8 +5,8 @@ library(patchwork)
 # 1 Basic Simulation
 
 true.prob = 0.39
-n1 = 1000
-n2 = 2000
+n1 = 1004
+n2 = 2008
 simulations = 10000
 
 poll1 = rbinom(simulations, n1, true.prob) / n1
@@ -43,7 +43,7 @@ margin.error2
 
 # 2 Resampling
 
-n = 1000
+n = 1004
 satisfied = round(n * 0.39)
 
 og.sample = tibble(
@@ -64,7 +64,7 @@ for (i in 1:10000){
 resample.df = tibble(p.hat = resample.means)
 
 ggplot(resample.df, aes(x = p.hat)) + 
-  geom_histogram(aes(y = after_stat(density)), bins = 30) +
+  geom_histogram(aes(y = after_stat(density)), bins = 15) +
   geom_density(color = "red") +
   labs(title = "Resampled Sample Proportions (Gallup Survey)",
        x = "Sample Proportion",
@@ -80,4 +80,35 @@ margin.error
 # 3 Simulation over n and p
 
 n.values = seq(100, 3000, by = 10)
+p.values = seq(0.01, 0.99, by = 0.01)
+
+results = expand.grid(n = n.values, p = p.values) |>
+  mutate(n = as.numeric(n), p = as.numeric(p))
+
+set.seed(123)
+
+for (i in 1:nrow(results)){
+  n = results$n[i]
+  for (j in 1:ncol(results)){
+    p = results$p[j]
+    
+    simus = rbinom(10000, n, p) / n
+    range_95 = quantile(simus, c(0.025, 0.975))
+    results$margin_error[i] = (range_95[2] - range_95[1]) / 2
+  }
+}
+ggplot(results, aes(x = p, y = n, fill = margin_error)) +
+  geom_tile() +
+  labs(title = "Margin of Error as a function of n and p",
+       x = "Proportion (p)",
+       y = "Sample Size (n)",
+       fill = "Margin of Error") +
+  theme_minimal()+
+  scale_fill_viridis_c()
+
+
+# 4 
+
+
+
 
