@@ -24,13 +24,13 @@
 \begin{document}
 
 \vspace{-1in}
-\title{Lab XX -- MATH 240 -- Computational Statistics}
+\title{Lab 10 -- MATH 240 -- Computational Statistics}
 
 \author{
-  First Author \\
-  Affiliation  \\
-  Department  \\
-  {\tt email@domain}
+  Camilo Granada Cossio \\
+  Colgate University  \\
+  Department of Mathematics  \\
+  {\tt cgranadacossio@colgate.edu}
 }
 
 \date{}
@@ -41,12 +41,20 @@
 %\raggedcolumns % If your spacing gets messed up try uncommenting 
                 % this line
 \begin{abstract}
+
+In this lab, we explored how sample size and population proportion affect the margin of error in survey sampling. We conducted simulation studies and apply the Wilson margin of error formula to compute and visualize margins of error. Our findings demonstrate that while larger sample sizes generally reduce margin of error, the true proportion play a crucial role, especially at the extremes. This analysis provide better context for interpreting polling results like those reported by Gallup.
+
 This document provides a basic template for the 2-page labs we will complete each week. Here, briefly summarize what you did and why it might be helpful. Provide all the top-line conclusions, but avoid providing \emph{all} the details. Results should be limited to ``we show X, Y, and Z."
 \end{abstract}
 
 \noindent \textbf{Keywords:} What topics does the lab cover concerning class? List 3-4 key terms here, separated by semicolons.
 
 \section{Introduction}
+
+Public opinion polls often report a fixed or rounded margin of error, such as  $\pm 4\%$, but this simplification hides important nuances. The margin of error depends not only on the sample size but also on the estimated proportion of success. In this lab, we investigate how both factors contribute to uncertainty in polling estimates.
+
+We begin by using simulated polling data to visualize the sampling distribution of the sample proportion under assumed population parameters. Then, we use resampling techniques to examine variation. Finally, we compute margins of error using the Wilson margin of error formula across a range of values to generalize our findings.
+
 Provide an overarching summary of what you're talking about. In this section, you introduce the idea to the reader, and your goal is to pull them in. What's the mystery you aim to solve?
 
 You want to provide enough background to understand the context of the work. Specifically, what is the question you are addressing? If it applies, describe what information currently exists about this problem, including citations, and explain how the question you're answering complements this work.
@@ -54,7 +62,7 @@ You want to provide enough background to understand the context of the work. Spe
 Provide a roadmap of the structure of the paper. 
 
 \subsection{Intro Subsection}
-You might need/want to discuss the topics in subsections. Or, you may have multiple questions.
+Gallup states a single margin of error for their polls. However, the sampling distribution's spread varies depending on the true proportion being estimated. When the true proportion is close to 0 or 1, variability is constrained, and the margin of error is smaller. This lab aims to make that relationship clear through simulations and mathematical reasoning.
 
 
 \begin{Figure}
@@ -103,18 +111,32 @@ penguins |>
         include.rownames=F)
 @
 \section{Methods}
-Describe the data you are working with, if applicable. Describe the specific process you will follow to answer the question at hand. This does not mean you should write something like this.
-\begin{quote}
-\textit{I did this and then I did that and then I did this other thing and then..., and then..., and then...}
-\end{quote}
-Instead, it should provide a clear and concise narrative that flows from the problem specification in the Introduction to how you will approach answering it. This is where I would expect to see some citations for \texttt{R} packages you will use to conduct the statistical analysis reported in the Results section.
 
+We conducted three main analyses:
+\begin{enumerate}
+\item Simulation study: We assumed a true proportion of 0.39 and generated $10,000$ samples for various sample sizes using \texttt{rbinom()}. We visualized the sampling distributions and calculated the middle 95\% range of simulated sample proportions.
+\item Resampling: We simulated an original sample of 1004 individuals with 39\% satisfaction and resampled $10,000$ times with replacement to estimate sampling variability.
+\item Wilson margin of error formula: We computed the margin of error using the Wilson formula across values of sample size ($100$ to $2000$) and true proportion ($0.01$ to $0.99$). This allowed us to create a heatmap of amrgin of error as a function of both variables.
+\end{enumerate}
+
+\texttt{R} packages used include \texttt{tidyverse} and \texttt{ggplot2} for data manipulation and visualization.
 
 \subsection{Methods Subsection}
-Much like the Introduction, subsections can be helpful for the Methods section. For example, you might describe data collection and the statistical analyses of the collected data in different subsections. Or, you may have different questions that require distinct methods. 
+
+We used the Wilson margin of error formula:
+
+\[
+\text{MOE}_{\text{Wilson}} = z_{1-\alpha/2} \times \frac{\sqrt{n\hat{p}(1-\hat{p}) + \frac{z_{1-\alpha/2}^2}{4}}}{n + z_{1-\alpha/2}^2}
+\]
+
+where $z_{1-\alpha/2}^2$ is the critical value from the standard normal distribution (1.96 for 95\% confidenc).
+
 
 \section{Results}
-Tie together the Introduction -- where you introduce the problem at hand -- and the methods --  what you propose to do to answer the question. Present your data, the results of your analyses, and how each reported aspect contributes to answering the question. This section should include table(s), statistic(s), and graphical displays. Make sure to put the results in a sensible order and that each result contributes a logical and developed solution. It should not just be a list. Avoid being repetitive. 
+
+We began with a simulation assuming p = $0.39$ and n = $1000$, and found that the middle 95\% range of sample proportions was approximately [$0.361$, $0.419$], giving a margin of error of about $2.9\%$. When we doubled the sample size to 2000, the margin of error shrank to about $2.1\%$, matching our theoretical expectations.
+
+In the resam
 
 \subsection{Results Subsection}
 Subsections can be helpful for the Results section, too. This can be particularly helpful if you have different questions to answer. 
