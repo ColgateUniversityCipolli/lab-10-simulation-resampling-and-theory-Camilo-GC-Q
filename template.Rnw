@@ -46,13 +46,13 @@ In this lab, we explored how sample size and population proportion affect the ma
 
 \end{abstract}
 
-\noindent \textbf{Keywords:} What topics does the lab cover concerning class? List 3-4 key terms here, separated by semicolons.
+\noindent \textbf{Keywords:} Sampling distributions; Margin of error; Wilson margin of error; resampling
 
 \section{Introduction}
 
-Public opinion polls often report a fixed or rounded margin of error, such as  $\pm 4\%$, but this simplification hides important nuances. The margin of error depends not only on the sample size but also on the estimated proportion of success. In this lab, we investigate how both factors contribute to uncertainty in polling estimates.
+Public opinion polls often report a fixed or rounded margin of error, such as  $\pm 4\%$, but this simplification hides important nuances. The margin of error depends not only on the sample size but also on the estimated proportion of success. In this lab, we investigate how both factors contribute to uncertainty in polling estimates.\\
 
-We begin by using simulated polling data to visualize the sampling distribution of the sample proportion under assumed population parameters. Then, we use resampling techniques to examine variation. Finally, we compute margins of error using the Wilson margin of error formula across a range of values to generalize our findings.
+\noindent We begin by using simulated polling data to visualize the sampling distribution of the sample proportion under assumed population parameters. Then, we use resampling techniques to examine variation. Finally, we compute margins of error using the Wilson margin of error formula across a range of values to generalize our findings.
 
 \subsection{Intro Subsection}
 Gallup states a single margin of error for their polls. However, the sampling distribution's spread varies depending on the true proportion being estimated. When the true proportion is close to $0$ or $1$, variability is constrained, and the margin of error is smaller. This lab aims to make that relationship clear through simulations and mathematical reasoning.
@@ -66,7 +66,7 @@ We conducted three main analyses:
 \item Wilson margin of error formula: We computed the margin of error using the Wilson formula across values of sample size ($100$ to $2000$) and true proportion ($0.01$ to $0.99$). This allowed us to create a heatmap of margin of error as a function of both variables using \texttt{geom\_raster()}.
 \end{enumerate}
 
-\texttt{R} packages used include \texttt{tidyverse} \citep{tidyverse} and \texttt{ggplot2} \citep{ggplot} for data manipulation and visualization.
+\noindent \texttt{R} packages used include \texttt{tidyverse} \citep{tidyverse}, \texttt{ggplot2} \citep{ggplot}, and \texttt{patchwork} \citep{patch} for data manipulation and visualization.
 
 \subsection{Mathematical Derivation}
 
@@ -77,30 +77,31 @@ We used the Wilson margin of error formula:
 \]
 
 
-where $z_{1-\alpha/2}^2$ is the critical value from the standard normal distribution ($1.96$ for $95\%$ confidence).
+\noindent where $z_{1-\alpha/2}^2$ is the critical value from the standard normal distribution ($1.96$ for $95\%$ confidence).
 
 
 \section{Results}
 
-We began with a simulation assuming p = $0.39$ and n = $1000$, and found that the middle $95\%$ range of sample proportions was approximately [$0.361$, $0.419$], giving a margin of error of about $2.9\%$. When we doubled the sample size to $2000$, the margin of error shrank to about $2.1\%$, matching our theoretical expectations.
+We began with a simulation assuming p = $0.39$ and n = $1000$, and found that the middle $95\%$ range of sample proportions was approximately [$0.361$, $0.419$], giving a margin of error of about $2.9\%$. When we doubled the sample size to $2000$, the margin of error shrank to about $2.1\%$, matching our theoretical expectations.\\
 
-In the resampling section, we created a sample of $390$ satisfied and $610$ unsatisfied responses, and conducted $10000$ resamples. The histogram of sample proportions mirrored the previous simulation, reinforcing the expected behavior of sampling variability.
+\noindent In the resampling section, we created a sample of $390$ satisfied and $610$ unsatisfied responses, and conducted $10000$ resamples. The histogram of sample proportions mirrored the previous simulation, reinforcing the expected behavior of sampling variability.\\
 
-Using the Wilson margin of error formula, we computed the margin of error across a grid of n and p values. A \texttt{geom\_raster()} plot revealed that the margin of error is highest around p = $0.5$ and decreases toward the boundaries at $0$ and $1$. It also decreases as sample size increases, though with diminishing returns.
+\noindent Using the Wilson margin of error formula, we computed the margin of error across a grid of n and p values. A \texttt{geom\_raster()} plot revealed that the margin of error is highest around p = $0.5$ and decreases toward the boundaries at $0$ and $1$. It also decreases as sample size increases, though with diminishing returns.
 
 \section{Discussion}
 
-Our simulations and mathematical calculations show that a fixed margin of error (like $\pm 4\%$) is overly simplistic. While larger samples do reduce variability, the proportion of interest strongly influences the precision of estimates. The Wilson margin of error provides a more nuanced and accurate measure of uncertainty, especially for small or extreme values of p.
+Our simulations and mathematical calculations show that a fixed margin of error (like $\pm 4\%$) is overly simplistic. While larger samples do reduce variability, the proportion of interest strongly influences the precision of estimates. The Wilson margin of error provides a more nuanced and accurate measure of uncertainty, especially for small or extreme values of p.\\
 
-For poll readers, this means interpreting results with caution. A statement like $39\%$ $\pm 4\%$ is only valid under specific assumptions, and real-world data may have more or less uncertainty.
+\noindent For poll readers, this means interpreting results with caution. A statement like $39\%$ $\pm 4\%$ is only valid under specific assumptions, and real-world data may have more or less uncertainty.\\
 
-Future polls should report margins of error as a function of both sample size and observed proportion, or at least clarify the assumptions behind a fixed error range.
+\noindent Future polls should report margins of error as a function of both sample size and observed proportion, or at least clarify the assumptions behind a fixed error range.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{2em}
+
 
 \begin{tiny}
 \bibliography{bib}

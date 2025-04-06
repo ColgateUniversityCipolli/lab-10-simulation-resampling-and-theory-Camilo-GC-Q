@@ -1,6 +1,7 @@
 library(ggplot2)
 library(tidyverse)
 library(patchwork)
+library(xtable)
 
 # 1 Basic Simulation
 
