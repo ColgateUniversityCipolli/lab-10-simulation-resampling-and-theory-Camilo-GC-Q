@@ -56,10 +56,6 @@ Provide a roadmap of the structure of the paper.
 \subsection{Intro Subsection}
 You might need/want to discuss the topics in subsections. Or, you may have multiple questions.
 
-\begin{Figure}
-\includegraphics{penguins.pdf}
-\captionof{figure}{This is a figure!} \label{fig:penguins}
-\end{Figure}
 
 \begin{Figure}
 % latex table generated in R 4.3.3 by xtable 1.8-4 package

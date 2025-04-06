@@ -109,6 +109,26 @@ ggplot(results, aes(x = p, y = n, fill = margin_error)) +
 
 # 4 
 
+nvals = seq(100, 2000, by = 10)
+pvals = seq(0.01, 0.99, by = 0.01)
+z = 1.96
+grid = expand.grid(n = nvals, p = pvals) |>
+  mutate(n = as.numeric(n), p = as.numeric(p))
+
+grid = grid |>
+  mutate(
+    wilson = (z * ((sqrt(n*p*(1-p) + (z^2 / 4)))/(n + z^2)))
+    )
+
+ggplot(grid, aes(x = p, y = n, fill = wilson)) + 
+  geom_tile() +
+  scale_fill_viridis_c(option = "plasma") +
+  labs(
+    title = "Wilson Margin of Error as a function of n and p",
+    x = "Proportion (p)",
+    y = "Sample Size (n)"
+  ) + 
+  theme_minimal()
 
 
 
