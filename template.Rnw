@@ -46,13 +46,13 @@ In this lab, we explored how sample size and population proportion affect the ma
 
 \end{abstract}
 
-\noindent \textbf{Keywords:} Sampling distributions; Margin of error; Wilson margin of error; resampling
+\noindent \textbf{Keywords:} Sampling distributions; Margin of error; Wilson margin of error; Resampling
 
 \section{Introduction}
 
 Public opinion polls often report a fixed or rounded margin of error, such as  $\pm 4\%$, but this simplification hides important nuances. The margin of error depends not only on the sample size but also on the estimated proportion of success. In this lab, we investigate how both factors contribute to uncertainty in polling estimates.\\
 
-\noindent We begin by using simulated polling data to visualize the sampling distribution of the sample proportion under assumed population parameters. Then, we use resampling techniques to examine variation. Finally, we compute margins of error using the Wilson margin of error formula across a range of values to generalize our findings.
+\noindent We began by using simulated polling data to visualize the sampling distribution of the sample proportion under assumed population parameters. Then, we use resampling techniques to examine variation. Finally, we compute margins of error using the Wilson margin of error formula across a range of values to generalize our findings.
 
 \subsection{Intro Subsection}
 Gallup states a single margin of error for their polls. However, the sampling distribution's spread varies depending on the true proportion being estimated. When the true proportion is close to $0$ or $1$, variability is constrained, and the margin of error is smaller. This lab aims to make that relationship clear through simulations and mathematical reasoning.
